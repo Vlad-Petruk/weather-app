@@ -1,9 +1,15 @@
 import { getCurrentWeatherData, processWeatherData } from "./api";
 
-async function getD() {
-  const myData = await getCurrentWeatherData("kyiv");
+const userInput = document.querySelector(".input");
+const searchBtn = document.querySelector(".searchBtn");
+
+async function serchForWether(city) {
+  const myData = await getCurrentWeatherData(city);
   console.log(myData);
   const parsedData = processWeatherData(myData);
-  console.log(parsedData.cloud);
+  console.log(parsedData.cloud, parsedData.temp_c);
 }
-getD();
+
+searchBtn.addEventListener("click", () => {
+  serchForWether(userInput.value);
+});

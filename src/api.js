@@ -1,20 +1,19 @@
 async function getCurrentWeatherData(location) {
-    try {
-      const response = await fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=7a84c19e7f6245b7814141628240402&q=${location}&days=3&aqi=no&alerts=no`,
-        { mode: "cors" },
-      );
-      const weatherData = await response.json();
-      // const weatherDatas = weatherData.current.temp_c;
-      //  console.log(weatherDatas)
-      // console.log(weatherData)
-      return weatherData;
-    } catch (e) {
-      console.log(e);
-    }
+  try {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=7a84c19e7f6245b7814141628240402&q=${location}&days=3&aqi=no&alerts=no`,
+      { mode: "cors" },
+    );
+    const weatherData = await response.json();
+
+    return weatherData;
+  } catch (e) {
+    console.log(e);
   }
-  
-  function processWeatherData(weatherData) {
+}
+
+function processWeatherData(weatherData) {
+  try {
     const myWeatherData = {
       conditions: {
         icon: weatherData.current.condition.icon,
@@ -34,7 +33,9 @@ async function getCurrentWeatherData(location) {
     };
     console.log(myWeatherData);
     return myWeatherData;
+  } catch (e) {
+    console.log(e);
   }
+}
 
-  
-  export {getCurrentWeatherData, processWeatherData} 
+export { getCurrentWeatherData, processWeatherData };
