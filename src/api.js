@@ -8,7 +8,13 @@ async function getCurrentWeatherData(location) {
 
     return weatherData;
   } catch (e) {
-    console.log(e);
+    if (e.error && e.error.message === "No matching location found.") {
+      console.log(e.message);
+      // Handle the specific error case here if needed
+    } else {
+      console.log(e.message);
+      // Handle other errors or perform a more generic error handling
+    }
   }
 }
 
