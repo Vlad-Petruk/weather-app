@@ -3,17 +3,25 @@ import { getCurrentWeatherData, processWeatherData } from "./api";
 const userInput = document.querySelector(".input");
 const searchBtn = document.querySelector(".searchBtn");
 const weatherCard = document.querySelector(".weather-card");
+const errorDiv = document.querySelector('.error');
 
 function handleInput(){
 
 }
 
 async function serchForWether(city) {
-  const myData = await getCurrentWeatherData(city);
-  console.log(myData);
-  const parsedData = processWeatherData(myData);
-  return parsedData
-  console.log(parsedData.cloud, parsedData.temp_c);
+  try{
+    errorDiv.textContent = '';
+    const myData = await getCurrentWeatherData(city);
+    if (myData == undefined){
+      errorDiv.textContent = 'No matching location found'
+    }
+    console.log(myData);
+    const parsedData = processWeatherData(myData);
+    return parsedData
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 async function createWeatherCard(city){
@@ -34,6 +42,8 @@ async function createWeatherCard(city){
   weatherConditions.appendChild(condIcon);
   weatherConditions.appendChild(condText);
 
+
+
   weatherCard.appendChild(cityName);
   weatherCard.appendChild(currentTime);
   weatherCard.appendChild(weatherConditions)
@@ -43,3 +53,6 @@ searchBtn.addEventListener("click", () => {
   createWeatherCard(userInput.value);
 });
 
+createWeatherCard('Kamieniec Podolski');
+
+export {serchForWether}

@@ -5,17 +5,14 @@ async function getCurrentWeatherData(location) {
       { mode: "cors" },
     );
     const weatherData = await response.json();
-
-    return weatherData;
-  } catch (e) {
-    if (e.error && e.error.message === "No matching location found.") {
-      console.log(e.message);
-      // Handle the specific error case here if needed
-    } else {
-      console.log(e.message);
-      // Handle other errors or perform a more generic error handling
-    }
+    if (!weatherData.location) {
+      throw new Error('No matching location found');
   }
+    return weatherData;
+  } catch (err) {
+    console.log(err)
+  }
+
 }
 
 function processWeatherData(weatherData) {
