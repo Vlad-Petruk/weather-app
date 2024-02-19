@@ -5,7 +5,17 @@ const userInput = document.querySelector(".input");
 const searchBtn = document.querySelector(".searchBtn");
 const weatherCard = document.querySelector(".weather-card");
 const errorDiv = document.querySelector('.error');
+const buttonC = document.querySelector('.buttonC');
+const buttonF = document.querySelector('.buttonF');
 
+userInput.value = 'Kamieniec Podolski'
+
+buttonC.addEventListener('click', ()=>{
+  createWeatherCard(userInput.value, "C")
+})
+buttonF.addEventListener('click', ()=>{
+  createWeatherCard(userInput.value, "F")
+})
 function handleInput(){
 
 }
@@ -26,9 +36,10 @@ async function serchForWether(city) {
 }
 
 searchBtn.addEventListener("click", () => {
-  createWeatherCard(userInput.value);
+  createWeatherCard(userInput.value, 'C');
 });
 
-createWeatherCard('Kamieniec Podolski');
 
-export {serchForWether, weatherCard}
+createWeatherCard('Kamieniec Podolski','C');
+
+export {serchForWether, weatherCard,userInput}

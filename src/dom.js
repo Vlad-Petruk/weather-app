@@ -1,9 +1,11 @@
-import { serchForWether, weatherCard } from ".";
+import { serchForWether, weatherCard, } from ".";
 
-async function createWeatherCard(city){
+async function createWeatherCard(city, unit){
     const cityWeatherData = await serchForWether(city);
     console.log(cityWeatherData);
+
     weatherCard.innerHTML= '';
+
     let cityName = document.createElement('p')
     cityName.textContent = `${cityWeatherData.location.city}, ${cityWeatherData.location.country}`;
     let currentTime = document.createElement('p');
@@ -17,12 +19,23 @@ async function createWeatherCard(city){
     condText.textContent = cityWeatherData.conditions.text;
     weatherConditions.appendChild(condIcon);
     weatherConditions.appendChild(condText);
-  
-  
-  
+
+    if (unit === 'F') {
+        let tempFar = document.createElement('p');
+        tempFar.textContent = `${cityWeatherData.temp_f}°F`;
+        weatherCard.appendChild(tempFar);
+    } else if (unit === 'C'){
+        let tempCels = document.createElement('p');
+        tempCels.textContent = `${cityWeatherData.temp_c}°C`;
+        weatherCard.appendChild(tempCels);
+    }
+    
     weatherCard.appendChild(cityName);
+   
+    weatherCard.appendChild(weatherConditions);
     weatherCard.appendChild(currentTime);
-    weatherCard.appendChild(weatherConditions)
-  }
+}
+
+
 
   export {createWeatherCard}
