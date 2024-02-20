@@ -1,7 +1,9 @@
 import { serchForWether, weatherCard, } from ".";
 import { getConditionsList } from "./api";
 
-const background = document.querySelector('body');
+const background = document.querySelector('.main-container');
+const toggleButons = document.querySelector('.toggleButtons');
+const inputGroup = document.querySelector('.input-group');
 
 async function createWeatherCard(city, unit){
     try{
@@ -22,6 +24,8 @@ async function createWeatherCard(city, unit){
         let condText = document.createElement('p');
         condText.textContent = cityWeatherData.conditions.text;
     
+        weatherCard.appendChild(toggleButons)
+        weatherCard.appendChild(inputGroup)
         weatherCard.appendChild(cityName);
         if (unit === 'F') {
             let tempFar = document.createElement('p');
