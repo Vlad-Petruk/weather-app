@@ -41,4 +41,24 @@ function processWeatherData(weatherData) {
   }
 }
 
-export { getCurrentWeatherData, processWeatherData };
+async function getConditionsList () {
+  const url = 'https://www.weatherapi.com/docs/weather_conditions.json';
+
+  fetch(url)
+    .then(response=>{
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+}
+
+getConditionsList()
+
+export { getCurrentWeatherData, processWeatherData, getConditionsList };

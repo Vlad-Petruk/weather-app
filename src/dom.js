@@ -1,4 +1,5 @@
 import { serchForWether, weatherCard, } from ".";
+import { getConditionsList } from "./api";
 
 const background = document.querySelector('body');
 
@@ -20,24 +21,25 @@ async function createWeatherCard(city, unit){
         condIcon.src = cityWeatherData.conditions.icon;
         let condText = document.createElement('p');
         condText.textContent = cityWeatherData.conditions.text;
-        
-        weatherConditions.appendChild(condIcon);
-        weatherConditions.appendChild(condText);
-
+    
+        weatherCard.appendChild(cityName);
         if (unit === 'F') {
             let tempFar = document.createElement('p');
             tempFar.textContent = `${cityWeatherData.temp_f}°F`;
-            weatherCard.appendChild(tempFar);
+            weatherConditions.appendChild(tempFar);
         } else if (unit === 'C'){
             let tempCels = document.createElement('p');
             tempCels.textContent = `${cityWeatherData.temp_c}°C`;
-            weatherCard.appendChild(tempCels);
+            weatherConditions.appendChild(tempCels);
         }
+        weatherConditions.appendChild(condIcon);
+        weatherConditions.appendChild(condText);
         
-        weatherCard.appendChild(cityName);
-    
         weatherCard.appendChild(weatherConditions);
+        
         weatherCard.appendChild(currentTime);
+
+        weatherCard.classList.add('flex-centered-col')
         switch (cityWeatherData.conditions.text){
             case "Overcast ":
                 background.style.background = 'blue';
