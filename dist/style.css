@@ -64,22 +64,77 @@
     border: 3px solid black;
     border-radius: 40px;
 
-    margin: 10px;
+    margin: 30px;
     padding: 5px 30px;
 
     background: var(--background-card);
-}
 
-.flex-centered{
-    display: flex;
-
-}
-
-.flex-centered-col{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+.header {
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 35px;
+    text-align: center;
+
+    height: 100px;
+}
+
+.conditions {
+    height: 35vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    padding: 60px 0 0 0;
+}
+
+.cond-text {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.cond-icon {
+    position: relative;
+    
+    bottom: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.temp {
+    position: relative;
+    bottom: 70px;
+
+    text-align: center;
+    font-weight: 900;
+    font-size: 80px;
+}
+
+.extra-box {
+    background-color: rgb(213, 225, 210);
+    border-radius: 20px;
+    width: 350px;
+    height: 100px;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 20px;
+}
+
+.extra-box > * {
+    text-align: center;
+}
+
 
 .error{
     color: red;

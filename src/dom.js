@@ -5,43 +5,47 @@ const background = document.querySelector('.main-container');
 const toggleButons = document.querySelector('.toggleButtons');
 const inputGroup = document.querySelector('.input-group');
 
+const header = document.querySelector('.header');
+const conditions = document.querySelector('.conditions');
+const condIcon = document.querySelector('.cond-icon');
+const condText = document.querySelector('.cond-text');
+const temperature = document.querySelector('.temp');
+
+const extraBox = document.querySelector('.extra-box');
+const wind = document.querySelector('.wind');
+const feelsLike = document.querySelector('.feels-like');
+const time = document.querySelector('.time');
+
 async function createWeatherCard(city, unit){
     try{
         const cityWeatherData = await serchForWether(city);
-        console.log(cityWeatherData);
-
         weatherCard.innerHTML= '';
 
-        let cityName = document.createElement('p')
-        cityName.textContent = `${cityWeatherData.location.city}, ${cityWeatherData.location.country}`;
-        let currentTime = document.createElement('p');
-        currentTime.textContent = cityWeatherData.location.time;
-    
-        let weatherConditions = document.createElement('div')
-        weatherConditions.classList.add('flex-centered')
-        let condIcon = document.createElement('img');
+        header.textContent = `${cityWeatherData.location.city}, ${cityWeatherData.location.country}`;
         condIcon.src = cityWeatherData.conditions.icon;
-        let condText = document.createElement('p');
         condText.textContent = cityWeatherData.conditions.text;
     
         weatherCard.appendChild(toggleButons)
         weatherCard.appendChild(inputGroup)
-        weatherCard.appendChild(cityName);
+        weatherCard.appendChild(header);
         if (unit === 'F') {
-            let tempFar = document.createElement('p');
-            tempFar.textContent = `${cityWeatherData.temp_f}°F`;
-            weatherConditions.appendChild(tempFar);
+            temperature.textContent = `${cityWeatherData.temp_f}°F`;
         } else if (unit === 'C'){
-            let tempCels = document.createElement('p');
-            tempCels.textContent = `${cityWeatherData.temp_c}°C`;
-            weatherConditions.appendChild(tempCels);
+            temperature.textContent = `${cityWeatherData.temp_c}°C`;
         }
-        weatherConditions.appendChild(condIcon);
-        weatherConditions.appendChild(condText);
+
+        wind.textContent = `Wind speed: ${cityWeatherData.wind_speed} km/h`;
+        if (unit === 'F') {
+            feelsLike.textContent = `Feels like: ${cityWeatherData.feelslike_c}°F`
+
+        } else if (unit === 'C'){
+            feelsLike.textContent = `Feels like: ${cityWeatherData.feelslike_c}°C`
+
+        }
+        time.textContent = cityWeatherData.location.time;
         
-        weatherCard.appendChild(weatherConditions);
-        
-        weatherCard.appendChild(currentTime);
+        weatherCard.appendChild(conditions);    
+        weatherCard.appendChild(extraBox);
 
         weatherCard.classList.add('flex-centered-col')
         switch (cityWeatherData.conditions.text){
