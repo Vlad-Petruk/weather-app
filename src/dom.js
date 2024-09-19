@@ -34,15 +34,22 @@ async function createWeatherCard(city, unit){
             temperature.textContent = `${cityWeatherData.temp_c}°C`;
         }
 
-        wind.textContent = `Wind speed: ${cityWeatherData.wind_speed} km/h`;
+        wind.textContent = `Wind speed ${cityWeatherData.wind_speed} km/h`;
         if (unit === 'F') {
-            feelsLike.textContent = `Feels like: ${cityWeatherData.feelslike_c}°F`
+            feelsLike.textContent = `Feels like ${cityWeatherData.feelslike_c}°F`
 
         } else if (unit === 'C'){
-            feelsLike.textContent = `Feels like: ${cityWeatherData.feelslike_c}°C`
+            feelsLike.textContent = `Feels like ${cityWeatherData.feelslike_c}°C`
 
         }
-        time.textContent = cityWeatherData.location.time;
+        const timeData = cityWeatherData.location.time;
+        const date = timeData.split(' ')[0];
+        const times = timeData.split(' ')[1];
+
+        const dayName = new Date(date).toLocaleString('en-us', {
+            weekday: 'long',
+        });
+        time.textContent = `${dayName} ${times}`;
         
         weatherCard.appendChild(conditions);    
         weatherCard.appendChild(extraBox);
@@ -52,7 +59,9 @@ async function createWeatherCard(city, unit){
             case "Overcast ":
                 background.style.background = 'blue';
                 break;
-            
+            default:
+                background.style.background = 'black';
+                break;
         }
     } catch (error) {
         console.log(error);

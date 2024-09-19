@@ -16,9 +16,6 @@ buttonC.addEventListener('click', ()=>{
 buttonF.addEventListener('click', ()=>{
   createWeatherCard(userInput.value, "F")
 })
-function handleInput(){
-
-}
 
 async function serchForWether(city) {
   try{
