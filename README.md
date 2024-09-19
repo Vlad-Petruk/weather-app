@@ -4,6 +4,9 @@
 It was created as part of [The Odin Project](https://www.theodinproject.com) course, 
 using the [Visual Crossing Weather API](https://www.visualcrossing.com/weather-api) to fetch real-time weather data.
 
+## Live Demo
+You can view the live version of the project [here](https://weather-app-vlad-petruks-projects.vercel.app/).
+
 ## Skills Practiced
 - JavaScript (ES6)
 - Webpack
